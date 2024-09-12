@@ -51,6 +51,8 @@ const GenreRanking = () => {
     return <Alert variant="danger">Error: {error.message}</Alert>;
   }
 
+  console.log("data.boxofs.boxof", data.boxofs.boxof);
+
   return (
     <div>
       <div className="ranking-container">

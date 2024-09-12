@@ -52,6 +52,7 @@ const GenreRanking = () => {
   }
 
   console.log("data.boxofs.boxof", data.boxofs.boxof);
+  console.log("API key", process.env.REACT_APP_API_KEY);
 
   return (
     <div>

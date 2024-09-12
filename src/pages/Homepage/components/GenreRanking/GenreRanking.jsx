@@ -70,14 +70,18 @@ const GenreRanking = () => {
         </ul>
       </div>
 
-      {/* <div>
+      <div>
         <RankingCarousel data={data.boxofs.boxof} activeMenu={activeMenu} />
-        <div className='button-wrap'>
-          <button type='button' className='more-button' onClick={ShowMoreRanking}>
+        <div className="button-wrap">
+          <button
+            type="button"
+            className="more-button"
+            onClick={ShowMoreRanking}
+          >
             랭킹 전체보기
           </button>
         </div>
-      </div> */}
+      </div>
     </div>
   );
 };

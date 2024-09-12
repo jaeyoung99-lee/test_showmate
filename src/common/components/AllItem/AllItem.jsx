@@ -38,11 +38,11 @@ const AllItem = ({ data, fetchNextPage, hasNextPage }) => {
     calculateItemWidth();
 
     // 브라우저 리사이즈 이벤트 리스너 등록
-    window.addEventListener("resize", calculateItemWidth());
+    window.addEventListener("resize", calculateItemWidth);
 
     // 컴포넌트 언마운트 시 이벤트 리스너 해제
-    return () => window.removeEventListener("resize", calculateItemWidth());
-  }, [itemCount]); // itemCount가 변경될 때마다 재실행
+    return () => window.removeEventListener("resize", calculateItemWidth);
+  }, [itemCount, calculateItemWidth]); // itemCount가 변경될 때마다 재실행
 
   // 무한 스크롤 처리
   useEffect(() => {

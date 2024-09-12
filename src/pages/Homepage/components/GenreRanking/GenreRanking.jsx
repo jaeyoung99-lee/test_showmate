@@ -71,7 +71,11 @@ const GenreRanking = () => {
       </div>
 
       <div>
-        <RankingCarousel data={data.boxofs.boxof} activeMenu={activeMenu} />
+        {data && data.boxofs && data.boxofs.boxof ? (
+          <RankingCarousel data={data.boxofs.boxof} activeMenu={activeMenu} />
+        ) : (
+          <p>데이터 불러오는 중</p>
+        )}
         <div className="button-wrap">
           <button
             type="button"

@@ -11,7 +11,7 @@ const DetailPage = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const request = await axios.get(`/pblprfr/${id}`); // API 호출 예시
+        const request = await axios.get(`/api/pblprfr/${id}`); // API 호출 예시
         console.log('호출 api URL',request.request.responseURL);
         const result = parseXML(request.data); // XML 변환
         const data = result.dbs.db;

@@ -18,7 +18,8 @@ const RankingCarousel = ({ data }) => {
   // 슬라이드 리스트를 참조하는 Ref
   const slideRef = useRef(null);
 
-  const visibleDataLength = Math.min(10, data.length); // 실제로 보여줄 데이터 개수 (최대 10개)
+  // data가 배열인지 확인하여 유효한 데이터 개수를 가져옴
+  const visibleDataLength = Array.isArray(data) ? Math.min(10, data.length) : 0; // data 유효성 검사 추가
 
   // 슬라이드 너비 계산 및 브라우저 크기 변경에 따른 재설정
   const calculateSlideWidth = () => {
@@ -26,29 +27,25 @@ const RankingCarousel = ({ data }) => {
     if (containerRef.current) {
       // 컨테이너 너비를 기준으로 슬라이드 너비 계산
       const containerWidth = containerRef.current.clientWidth;
-
+      // 브라우저 너비가 1180px 이상이면 5개, 768px 이상이면 2개, 그 미만이면 1개로 설정
+      // 화면 크기에 따른 슬라이드 개수
+      const newSlideCount = containerWidth >= 1180 ? 5 : containerWidth >= 768 ? 2 : 1;
       // 슬라이드 너비 = (컨테이너 너비 - (슬라이드 간격 * (슬라이드 개수 -1)) / 슬라이드 개수
       const calculatedSlideWidth = (containerWidth - slideGap * (slideCount - 1)) / slideCount;
-
+      // 슬라이드 개수 상태 업데이트
+      setSlideCount(newSlideCount);
       // 슬라이드 너비 상태 업데이트
       setSlideWidth(calculatedSlideWidth);
-
-      // 브라우저 너비가 1180px 이상이면 4개, 768px 이상이면 2개, 그 미만이면 1개로 설정
-      setSlideCount(containerWidth >= 1180 ? 5 : containerWidth >= 768 ? 2 : 1);
     }
   };
 
   // 슬라이드 너비 계산 및 브라우저 크기 변경에 따른 재설정
   // 컴포넌트가 처음 렌더링 될 때와 브라우저 크기가 변경될 때마다 호출
   useEffect(() => {
-    // 컴포넌트가 완전히 마운트된 후에만 계산하도록 보장
-    if (containerRef.current) {
-      calculateSlideWidth();
-    }
-
+    // 첫 렌더링에서 슬라이드 너비 계산
+    calculateSlideWidth();
     // 브라우저 크기 변경 이벤트 리스너 등록
     window.addEventListener('resize', calculateSlideWidth);
-
     // 컴포넌트 언마운트 시 이벤트 리스너 해제
     return () => {
       window.removeEventListener('resize', calculateSlideWidth);
@@ -102,7 +99,7 @@ const RankingCarousel = ({ data }) => {
                   </li>
                 ))
               ) : (
-                <div></div>
+                <p>데이터가 없습니다.</p>
               )}
             </ul>
           </div>
